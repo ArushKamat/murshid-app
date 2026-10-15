@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Murshid | UAE Tour Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#011014;--gray:#59666f;--blue:#f5faff;--blue-line:#d1e5f7;--sand:#fce0ad;--orange:#f28c46;--page:#d9d9d9}
+*{box-sizing:border-box;margin:0}
+body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:var(--page);color:var(--ink);min-height:100dvh;display:grid;place-items:center}
+.phone{position:relative;width:375px;height:812px;background:#fff;overflow:hidden;border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.18)}
+@media(max-width:500px){body{display:block}.phone{width:100vw;height:100dvh;border-radius:0;box-shadow:none}}
+.screen{position:absolute;inset:0;overflow:hidden}
+.sky{position:absolute;left:0;right:0;top:0;height:270px;background:linear-gradient(180deg,#a6ccf5 0%,#fcebbf 55%,#fff 100%)}
+.sun{position:absolute;left:50%;top:70px;width:100px;height:100px;margin-left:-50px;border-radius:50%;background:radial-gradient(circle,#fff3b8,rgba(255,232,150,.2) 70%)}
+/* Home */
+.hero{position:relative;text-align:center;padding-top:96px}
+.hero p{font-size:30px;font-weight:400}
+.hero h1{font-size:38px;font-weight:700;margin-top:2px}
+h2{font-size:18px;font-weight:700;padding:0 21px}
+.insights{display:flex;gap:10px;padding:14px 21px;overflow-x:auto;scrollbar-width:none}
+.insight{flex:0 0 118px;height:136px;border-radius:30px;background:#f9f9f9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:12px;font-weight:600;text-align:center}
+.insight.blue{background:var(--blue)}
+.insight span{font-size:44px;line-height:1}
+.cards{display:flex;gap:30px;padding:0 17px;overflow-x:auto;scrollbar-width:none;margin-top:22px}
+.card{flex:0 0 172px;height:258px;border:1px solid var(--ink);border-radius:30px;overflow:hidden;position:relative;background:linear-gradient(180deg,#ffb27a,#ffd9a8 60%,#f5b97c)}
+.card b{display:block;font-size:17px}
+.card small{font-size:13px}
+.card .t{position:absolute;left:9px;top:8px;z-index:2}
+.card svg{position:absolute;left:0;bottom:0;width:100%}
+.chat-fab{position:absolute;right:16px;bottom:34px;width:56px;height:56px;border-radius:50%;border:0;background:var(--sand);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.chat-fab:focus-visible,.send:focus-visible,.back:focus-visible,.chip:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.chat-fab svg{width:26px;height:26px}
+.fab-label{position:absolute;right:80px;bottom:48px;background:#fff;border-radius:16px;padding:8px 12px;font-size:12px;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.bar{position:absolute;left:50%;bottom:8px;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:#121417}
+/* Chat */
+#chat{z-index:10;background:#fff;transform:translateY(100%);transition:transform .3s ease-out;visibility:hidden}
+#chat.open{transform:none;visibility:visible}
+.head{position:absolute;left:24px;right:24px;top:57px;display:flex;align-items:center;gap:12px}
+.back{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.8);display:grid;place-items:center;cursor:pointer}
+.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(90deg,#fcd185,#f58c47);display:grid;place-items:center;font-size:22px;font-weight:700}
+.head b{font-size:18px;display:block}
+.head small{font-size:12px;color:var(--gray);display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:#21a661}
+.msgs{position:absolute;left:0;right:0;top:132px;bottom:150px;overflow-y:auto;padding:0 24px;display:flex;flex-direction:column;gap:14px}
+.day{text-align:center;font-size:11px;font-weight:600;color:var(--gray)}
+.b{max-width:82%;padding:12px 16px;font-size:14px;line-height:1.45;border-radius:20px;white-space:pre-wrap;overflow-wrap:anywhere}
+.b.bot{align-self:flex-start;background:var(--blue);border-bottom-left-radius:6px}
+.b.user{align-self:flex-end;background:var(--sand);border-bottom-right-radius:6px}
+.typing{display:flex;gap:5px;align-items:center;padding:16px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--gray);animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.typing i{animation:none}#chat{transition:none}}
+.chips{position:absolute;left:0;right:0;bottom:92px;display:flex;gap:8px;padding:0 24px;overflow-x:auto;scrollbar-width:none}
+.chip{flex:0 0 auto;border:1px solid var(--blue-line);background:var(--blue);border-radius:20px;padding:10px 16px;font:600 12px "Plus Jakarta Sans",sans-serif;color:var(--ink);cursor:pointer}
+.input{position:absolute;left:24px;right:24px;bottom:30px;height:56px;border-radius:28px;border:1px solid #ece9e9;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.06);display:flex;align-items:center;padding:6px 6px 6px 20px;gap:8px}
+.input input{flex:1;min-width:0;border:0;outline:0;font:400 14px "Plus Jakarta Sans",sans-serif;color:var(--ink);background:transparent}
+.input input::placeholder{color:#666d75}
+.send{width:44px;height:44px;border-radius:50%;border:0;background:var(--ink);color:#fff;display:grid;place-items:center;cursor:pointer}
+.send:disabled{opacity:.45;cursor:not-allowed}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <section class="screen" id="home">
+    <div class="sky"></div><div class="sun"></div>
+    <div class="hero"><p>Ready to Explore</p><h1>UAE!</h1></div>
+    <h2 style="margin-top:96px">All Insights Today</h2>
+    <div class="insights">
+      <div class="insight"><span>📍</span>Trending<br>Destination</div>
+      <div class="insight blue"><span>⛅</span>Weather<br>Friendly</div>
+      <div class="insight"><span>🏝️</span>Hidden Gem<br>Location</div>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="t"><b>Jebel Jais</b><small>(Mountain) جبل جيس</small></div>
+        <svg viewBox="0 0 172 200" aria-hidden="true"><path d="M0 130 L60 50 L90 85 L120 45 L172 120 L172 200 L0 200Z" fill="#b8683f"/><path d="M0 160 Q50 130 100 160 T172 150 L172 200 L0 200Z" fill="#7d4a2c"/></svg></div>
+      <div class="card"><div class="t"><b>Qasr Al Hosn</b><small>(Fort) قصر الحصن</small></div>
+        <svg viewBox="0 0 172 200" aria-hidden="true"><path d="M20 200 V95 h22 v-20 h16 v20 h14 v-35 h18 v35 h30 v105Z" fill="#9c5f3a"/><path d="M0 170 Q60 150 172 175 V200 H0Z" fill="#6b4126"/></svg></div>
+    </div>
+    <span class="fab-label">Ask Murshid</span>
+    <button class="chat-fab" id="open" aria-label="Chat with Murshid">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.3 1.1 4.4 2.9 5.9L4 21l4-1.9c1.2.4 2.600.6 4 .6 5.500 0 10-3.800 10-8.500S17.500 3 12 3Z"/><path d="M17.500 5.500l.7 1.600 1.600.7-1.600.7-.7 1.600-.7-1.600-1.600-.7 1.600-.7z" fill="#fce0ad"/></svg>
+    </button>
+    <div class="bar"></div>
+  </section>
+
+  <section class="screen" id="chat" aria-label="Chat with Murshid">
+    <div class="sky"></div>
+    <div class="head">
+      <button class="back" id="back" aria-label="Back to home"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#011014" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 4 8l6 6"/></svg></button>
+      <div class="avatar" aria-hidden="true">م</div>
+      <div><b>Murshid</b><small><span class="dot"></span>Your UAE guide</small></div>
+    </div>
+    <div class="msgs" id="msgs" aria-live="polite">
+      <div class="day">Today</div>
+      <div class="b bot">Marhaba! I'm Murshid, your UAE guide. Ask me about places, food, culture, or the best time to visit.</div>
+    </div>
+    <div class="chips" id="chips">
+      <button class="chip">Hidden gems in Fujairah</button>
+      <button class="chip">What to wear at the mosque?</button>
+      <button class="chip">Dubai or Abu Dhabi for families?</button>
+    </div>
+    <div class="input">
+      <input id="text" type="text" maxlength="500" placeholder="Ask Murshid about the UAE..." aria-label="Message Murshid" autocomplete="off">
+      <button class="send" id="send" aria-label="Send"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14V2M3 7l5-5 5 5"/></svg></button>
+    </div>
+    <div class="bar"></div>
+  </section>
+
+</div>
+<script>
+const API = "https://murshid-backend-jlfk.onrender.com/chat";
+const $ = id => document.getElementById(id);
+const msgs = $("msgs"), input = $("text"), sendBtn = $("send");
+let history = [], busy = false;
+
+$("open").onclick = () => { $("chat").classList.add("open"); setTimeout(() => input.focus(), 320); };
+$("back").onclick = () => $("chat").classList.remove("open");
+
+function bubble(text, who) {
+  const d = document.createElement("div");
+  d.className = "b " + who;
+  let out = text.replace(/[\u00A0\u2007\u2009\u200A\u202F]/g, " ").replace(/[\u200B-\u200D\uFEFF]/g, "");
+  if (who === "bot") {
+    const trimmed = out.replace(/\s*(?:Want|Would you like|Do you want|Shall I)\b[^.?!]*\?\s*$/i, "").trim();
+    if (trimmed) out = trimmed;
+  }
+  d.textContent = out;
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+  return d;
+}
+function typing() {
+  const d = document.createElement("div");
+  d.className = "b bot typing";
+  d.setAttribute("aria-label", "Murshid is typing");
+  d.innerHTML = "<i></i><i></i><i></i>";
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+  return d;
+}
+
+async function send(text) {
+  text = text.trim();
+  if (!text || busy) return;
+  busy = true; sendBtn.disabled = true; input.value = "";
+  history.push({ role: "user", content: text });
+  bubble(text, "user");
+  const t = typing(); typingEl = t;
+  try {
+    const reply = await ask();
+    history.push({ role: "assistant", content: reply });
+    t.remove(); bubble(reply, "bot");
+  } catch (e) {
+    history.pop();
+    t.remove();
+    bubble(e.rate
+      ? "Too many messages. Give Murshid a minute and try again."
+      : "Murshid is warming up, please try again in a moment.", "bot");
+  } finally {
+    busy = false; sendBtn.disabled = false; input.focus();
+  }
+}
+
+let typingEl = null;
+function wakeNote() {
+  if (typingEl && typingEl.classList.contains("typing")) {
+    typingEl.classList.remove("typing");
+    typingEl.textContent = "Waking Murshid up, this can take up to a minute...";
+  }
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// The free server sleeps when idle. Retry a few times while it wakes up.
+async function ask() {
+  for (let i = 0; i < 9; i++) {
+    let timer;
+    try {
+      const r = await Promise.race([
+        fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: history.slice(-20) })
+        }),
+        new Promise((_, rej) => { timer = setTimeout(() => rej(new Error("timeout")), 30000); })
+      ]);
+      if (r.status === 429) throw Object.assign(new Error("rate limit"), { rate: true });
+      if (r.status >= 500 && i < 8) { console.warn("Murshid server not ready, retrying", r.status); wakeNote(); await sleep(8000); continue; }
+      const d = await r.json();
+      if (!r.ok || !d.reply) throw new Error(d.error || "Bad response");
+      return d.reply;
+    } catch (e) {
+      if (e.rate || i === 8) throw e;
+      console.warn("Murshid attempt " + (i + 1) + " failed:", e);
+      wakeNote();
+      await sleep(8000);
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+}
+
+// Wake the server as soon as the page opens
+fetch(API.replace("/chat", "/"), { mode: "no-cors" }).catch(() => {});
+
+sendBtn.onclick = () => send(input.value);
+input.addEventListener("keydown", e => { if (e.key === "Enter") send(input.value); });
+document.querySelectorAll(".chip").forEach(c => c.onclick = () => send(c.textContent));
+</script>
+</body>
+</html>
